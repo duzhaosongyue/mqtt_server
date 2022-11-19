@@ -1,0 +1,38 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenLocal()
+    maven {
+        url 'https://maven.aliyun.com/repository/public'
+    }
+    mavenCentral()
+}
+
+dependencies {
+    //spring配置文件配置
+    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    //集成mqtt
+    implementation 'org.fusesource.mqtt-client:mqtt-client:1.16'
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
